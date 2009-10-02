@@ -29,6 +29,12 @@ class Net::SMTP
     @starttls = :always
     @ssl_context = context
   end
+  
+  def enable_starttls_auto(context = Net::SMTP.default_ssl_context)
+    raise 'openssl library not installed' unless defined?(OpenSSL)
+    @starttls = :auto
+    @ssl_context = context
+  end
 
   alias tls_old_start start
 
